@@ -21,30 +21,21 @@
 // 其中abc含有bc，输出"true"
 #include <iostream>
 #include <string>
-#include <unordered_set>
+#include <unordered_map>
 using namespace std;
 int main()
 {
     string shortS, longS;
-    bool res;
     while (cin >> shortS >> longS)
     {
-        unordered_set<char> set;
-        for (char c : longS)
-        {
-            set.insert(c);
-        }
-        res = true;
-        for (char c : shortS)
-        {
-            if (!set.count(c))
-            {
+        bool res = true;
+        unordered_map<char, int> mapA;
+        for (auto i : longS)
+            mapA[i] = 1;
+        for (auto i : shortS)
+            if (mapA[i] != 1)
                 res = false;
-                break;
-            }
-        }
-        // boolalpha操纵符改变布尔值格式
-        cout << boolalpha << res << endl;
+        cout << (res ? "true" : "false") << endl;
     }
     return 0;
 }
